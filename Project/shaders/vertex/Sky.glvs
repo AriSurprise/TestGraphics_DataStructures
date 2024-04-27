@@ -1,0 +1,27 @@
+#version 430 core
+
+layout (location = 0) in vec3 texLoc; // unused: for layout uniformity & clarity
+layout (location = 1) in vec3 coords;
+layout (location = 2) in vec3 normal;
+
+// View from Model coordinate basis rotational shift
+uniform mat4 vFw = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+// Projection from View perspective distortion shift
+uniform mat4 pFv = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+// Linear direction vector from model center at origin
+out vec3 linDir;
+
+void main()
+{
+    linDir = coords;
+    vec4 pos = pFv * vFw * vec4(coords, 1.0);
+    gl_Position = pos.xyww;
+} 

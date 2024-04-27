@@ -1,0 +1,14 @@
+#version 430 core
+
+// skybox texture coordinate from assumed linear model position vector
+in vec3 linDir;
+
+// Sampler to interpolate UV coords out of the skybox
+uniform samplerCube skybox;
+
+out vec4 FragColor;
+
+void main()
+{    
+    FragColor = texture(skybox, linDir);
+}

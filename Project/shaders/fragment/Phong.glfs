@@ -1,0 +1,225 @@
+#version 430 core
+
+struct Light
+{
+  vec3 pos;     // Pposition of the light source
+  vec3 col;     // RGB color intensity values of the light
+  float atten;  // Light decay / attenuation
+  int type;     // Enum: 0=off, 1=point, 2=direction, 3=spot
+};
+
+// vertex position input / attribute
+in vec4 vP;
+// vertex normal orientation input / attribute
+in vec4 vN;
+// vertex color input / attribute
+in vec3 vC;
+// vertex <u,v, set value>; texture space [0,1] ratio input / attribute
+in vec3 vT0;
+// vec3 is enough to assign a UV index to a set, even if multiple UVs can't be
+// assigned per vertex this way; it's at least more succinct than a bunch of 0's
+// or variable width uv allotments would take, while allowing for cube mapping
+
+// vertex model space coordinates (to be used in procedural uv mapping)
+in vec3 vMP;
+
+// Value to multiply output by to tint a falt color overlay
+uniform vec3 tint = { 1.00f, 1.00f, 1.00f };
+// Station Point / Coordinate of camera view / eye
+uniform vec3 SP = { 0.0f, 0.0f,-0.99f };
+// Ambient, faux, RGB inter-object reflected light sum amalgam in scene
+uniform vec3 Ka = { 0.10f, 0.10f, 0.10f };
+// Material diffuse shading RGB setting
+uniform vec3 Kd = { 1.0f, 1.0f, 1.0f };
+// Material specular shading RGB setting
+uniform vec3 Ks = { 1.0f, 1.0f, 1.0f };
+// Material incandescent shading RGB setting
+uniform vec3 Ki = { 0.00f, 0.00f, 0.00f };
+// Material fresnel shading RGB setting
+uniform vec3 Kf = { 0.00f, 0.00f, 0.00f };
+// Specular light falloff/decay rate
+uniform float Ns = 1000.0f;
+// Sampler to interpolate UV coords out of the default texture channel (0)
+uniform sampler2D sTex0;
+// Enumeration of which UV projection mode to be used:
+// 0: none (cpu stored), 1: planar, 2: spherical, 3: cylindrical, 4:cube
+uniform int proceduralUVs = 0;
+// Conversion from position to UV projection along z axis
+uniform mat4 uvB = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+// Collection of light source attributes
+uniform Light source[16] =
+  { {{ 1.00f, 0.00f,-0.99f }, { 0.20f, 0.20f, 0.00f }, 1.0f, 1 },   //  0
+    {{ 0.00f,-1.00f,-0.99f }, { 0.20f, 0.00f, 0.20f }, 1.0f, 1 },   //  1
+    {{-1.00f, 0.00f,-0.99f }, { 0.00f, 0.20f, 0.20f }, 1.0f, 1 },   //  2
+    {{ 0.00f, 0.70f,-0.99f }, { 0.50f, 0.50f, 0.40f }, 0.0f, 1 },   //  3
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  4
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  5
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  6
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  7
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  8
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   //  9
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   // 10
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   // 11
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   // 12
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   // 13
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 },   // 14
+    {{ 0.00f, 0.00f, 0.00f }, { 0.00f, 0.00f, 0.00f }, 0.0f, 0 } }; // 15
+
+out vec4 FragColor;
+
+void main()
+{
+  vec3 current;
+  vec3 mag;
+  float theta;
+  float norm;
+  vec3 uvSet;
+  if (proceduralUVs != 0) { current = (uvB * vec4(vMP, 1.0)).xyz; }
+  switch (proceduralUVs)
+  {
+  case 0:
+    uvSet = vT0;
+    break;
+  case 1: // planar mapped uv calculations
+    uvSet = vec3((current.xy + vec2(0.5f, 0.5f)), 0.0f);
+    break;
+  case 2: // spherically mapped uv calculations
+    theta = atan(current.y, current.x);
+    uvSet = vec3(vec2(-theta, (1.5707963267949f - acos(current.z))*2.0 )
+              * 0.31830988618379f, 0.0f);
+    break;
+  case 3: // cylindrically mapped uv calculations
+    theta = atan(current.y, current.x);
+    uvSet = vec3(theta * -0.31830988618379f, (current.z + 0.5f), 0.0f);
+    break;
+  case 4: // cube mapped uv calculations
+    mag = vec3(abs(current.x), abs(current.y), abs(current.z));
+    if      ((mag.y >= mag.x && mag.y > mag.z)  // y dominant: 
+          || (mag.y >= mag.z && mag.y > mag.x)) // top / bottom faces 
+    {
+      if (current.y > 0.0f)       // face[2]: top; +y, using <-z, +x>
+      {
+        uvSet = vec3(vec2( current.x + 0.5f, current.z + 0.5f), 2.0f);
+      }
+      else                        // face[3]: bottom; -y, using <+z, +x>
+      {
+        uvSet = vec3(vec2( current.x + 0.5f,-current.z + 0.5f), 3.0f);
+      }
+    }
+    else if ((mag.z >= mag.x && mag.z > mag.y)  // z dominant: 
+          || (mag.z >= mag.y && mag.z > mag.x)) // front / back faces 
+    {
+      if (current.z > 0.0f)       // face[4]: front; +z, using <+y, +x>
+      {
+        uvSet = vec3(vec2(-current.x + 0.5f, current.y + 0.5f), 4.0f);
+      }
+      else                        // face[5]: back; -z, using <+y, -x>
+      {
+        uvSet = vec3(vec2( current.x + 0.5f, current.y + 0.5f), 5.0f);
+      }
+    }
+    else if ((mag.x >= mag.z && mag.x > mag.y)  // x dominant: 
+          || (mag.x >= mag.y && mag.x > mag.z)) // left / right faces 
+    {
+      if (current.x > 0.0f)       // face[0]: left; +x, using <+y, -z>
+      {
+        uvSet = vec3(vec2( current.z + 0.5f, current.y + 0.5f), 0.0f);
+      }
+      else                        // face[1]: right; -x, using <+y, +z>
+      {
+        uvSet = vec3(vec2(-current.z + 0.5f, current.y + 0.5f), 1.0f);
+      }
+    }
+    else // all <x,y,z> components are equal
+    {
+      uvSet = vT0;
+    }
+    break;
+  default: // user provided uvs
+    uvSet = vT0;
+    break;
+  }
+  // Normalize varying input vectors in fragment shader for consistency
+  // Direction of surface normal (3D unit vector)
+  vec3 m = (normalize(vN.xyz));
+  // Point on surface 3D world coordinate
+  vec3 n = (vP / vP.w).xyz;
+  // Direction of view-point (3D unit vector)
+  vec3 v = normalize((SP - n));
+
+  // Start at minimum value of ambient light color
+  vec3 illum = Kd * Ka; // Running illumination sum: start at material * ambient
+  // Add any local incandescent / fresnel influences
+  if (Ki.r > 0.0f || Ki.g > 0.0f || Ki.b > 0.0f) // has incandescence branch
+  {
+    if (Kf.r > 0.0f || Kf.g > 0.0f || Kf.b > 0.0f)
+    {
+      float vm = dot(v, m);
+      if (vm > 0.0f)
+      {
+        vm = 1.0f - vm;
+        vm = vm * vm;
+        vm = 1.0f - vm;
+        illum += Ki * vm;
+        illum += Kf * (1.0f-vm);
+      }
+      else
+      {
+        illum += Kf;
+      }
+    } // end incandescence and fresnel both enabled branch
+    else // has incandescence with no fresnel value branch (flat shade value)
+    {
+        illum += Ki;
+    } // end incandescence w/o fresnel shading branch
+  } // end incandescence enabled branch
+  else if (Kf.r > 0.0f || Kf.g > 0.0f || Kf.b > 0.0f) // fresnel no incancescence
+  {
+    float vm = dot(v, m);
+    vm = 1.0f - vm;
+    vm = vm * vm;
+    vm = 1.0f - vm;
+    if (vm > 0.0f)
+    {
+      illum += Kf * (1.0f - vm);
+    }
+    else
+    {
+      illum += Kf;
+    }
+  } // end fresnel w/o incandescence branch
+
+  // Iterate over lights
+  for (int i = 0; i < 16; ++i) {
+    // Confirm light source is set to be on / used
+    if (source[i].type != 0) {
+      // Direction of light (3D unit vector)
+      vec3 l = normalize((source[i].pos - n));
+
+      // Calculate diffuse shading as relevant
+      float ml = dot(m,l); // unit vectors => cos(angle between surface & light)
+      if (ml > 0) { // render if 0-90 degree angle between surface & light
+        vec3 diff = Kd * source[i].col * ml * vec3(texture(sTex0, uvSet.xy));
+        illum += diff; // add diffuse lighting into illumination sum
+
+        // Calculate specular shading as relevant
+        vec3 r = 2*ml*m - l; // Direction of perfect specular reflection (Phong)
+        float vr = dot(v, r); // cos(ang(view, refl)): [-1,1] <=> [-90,90]deg
+
+        if (vr > 0) { // render only if 0-90 degree from view to reflected light
+          vec3 spec = Ks * source[i].col * pow(vr, Ns);
+          illum += spec; // add specular lighting into illumination sum
+
+        } // end specular viewing angle in range check
+      } // end diffuse shading in range check
+    } // end light in use check
+  } // end light iteration
+
+  // Clamp output to white at most (plus 0 at least, but no lowering source)
+  vec3 surface = vec3(min(illum.x,1.0f), min(illum.y,1.0f), min(illum.z,1.0f));
+  vec3 comp = surface * vC * tint;
+  FragColor = vec4(comp.x, comp.y, comp.z, 1.0f);
+}

@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Content">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{85637473-0167-47d5-940c-80bd55c6b45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\External">
+      <UniqueIdentifier>{605c351a-dff0-4876-a58c-d263599d507b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utility">
+      <UniqueIdentifier>{977828cf-54e9-4e40-ab69-6afbb7e9bb84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math">
+      <UniqueIdentifier>{e7e58612-36c8-40f7-8bcc-ae4d5b9f3908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\Matrix">
+      <UniqueIdentifier>{fbed1931-1383-405b-b1aa-dc45b677ea7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\Polynomial">
+      <UniqueIdentifier>{85135a3b-adbe-4b21-9926-9d5a4bc4cd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\Vector">
+      <UniqueIdentifier>{70ac9ddb-9109-46d9-94d9-8b9961a4dc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\Combinatoric">
+      <UniqueIdentifier>{7dbf97f1-720a-4c4e-8f6d-2f792a8cc7bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\File">
+      <UniqueIdentifier>{44ea3d76-4427-41a8-837c-35b304880bd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{c1ee2096-21d4-421b-9da7-6d1345af5cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{9b4add7d-87d3-42f8-b483-7a95ca415c5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Asset">
+      <UniqueIdentifier>{37f41b25-6fd6-4c04-a0c2-e6e93acf6cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Asset\Texture">
+      <UniqueIdentifier>{49df8a5d-3cde-4f51-90ca-54bca40fffa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Asset\Mesh">
+      <UniqueIdentifier>{6d17cbdb-ae43-45a8-8f5a-076433f14632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Asset\Material">
+      <UniqueIdentifier>{8dd6b821-bcd0-479f-87b7-b0ef3b298020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window">
+      <UniqueIdentifier>{df61b06f-2742-4d0c-adac-f7c36f8eca4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Renderer">
+      <UniqueIdentifier>{79eea0c7-dc0a-4f54-8d31-0a28502005e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Asset\Shader">
+      <UniqueIdentifier>{c17b2a52-97ff-4ee4-a4fb-10667073c24a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Viewport">
+      <UniqueIdentifier>{6d5e1027-79dd-46eb-bf75-0e92012424ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Viewport\GLFW">
+      <UniqueIdentifier>{f96bd166-042a-4a0a-a76e-45bc5b5cc941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Input">
+      <UniqueIdentifier>{0e21d128-d32b-4262-8125-9a896385a120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Input\GLFW">
+      <UniqueIdentifier>{2ba62c0c-3d3b-42af-ab40-0096cdd17228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Window\Renderer\OpenGL4">
+      <UniqueIdentifier>{d5d12381-aec1-4d44-9ff7-681eff957302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{ceca8262-c0d4-4ea3-a2f7-97eb69492618}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\glad\glad.c">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ang.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASCIIValue.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Log.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\m2f.cpp">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\m3f.cpp">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\m4f.cpp">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mNf.cpp">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nCr.cpp">
+      <Filter>Engine\Math\Combinatoric</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v2f.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v3f.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v4f.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vNf.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pNom.cpp">
+      <Filter>Engine\Math\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pTerm.cpp">
+      <Filter>Engine\Math\Polynomial</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ASCIIPath.cpp">
+      <Filter>Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewport.cpp">
+      <Filter>Engine\Graphics\Window\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ViewportGLFW.cpp">
+      <Filter>Engine\Graphics\Window\Viewport\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>Engine\Graphics\Window\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RendererGL4.cpp">
+      <Filter>Engine\Graphics\Window\Renderer\OpenGL4</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Engine\Graphics\Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Blinn.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lambert.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Phong.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GuiAttr.cpp">
+      <Filter>Content</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framebuffer.cpp">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gbuffer.cpp">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>Engine\Graphics\Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Capture.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cubemap.cpp">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderAttr.cpp">
+      <Filter>Engine\Graphics\Asset\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderFile.cpp">
+      <Filter>Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skybox.cpp">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\File.cpp">
+      <Filter>Engine\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\stb_image.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\imgui.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\imgui_demo.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\imgui_draw.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\imgui_tables.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\imgui_widgets.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Packages\include\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Engine\External</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Engine\Graphics\Window\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputGLFW.cpp">
+      <Filter>Engine\Graphics\Window\Input\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>Engine\Graphics\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v6f.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AABB.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ray.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BSphere.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v3u.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Triangle.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stats.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Value.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\v2u.cpp">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OBB.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mNMf.cpp">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ang.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ASCIIValue.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Log.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TypeErrata.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Value.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\m2f.h">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\m3f.h">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\m4f.h">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mNf.h">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nCr.h">
+      <Filter>Engine\Math\Combinatoric</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v2f.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v3f.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v4f.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vNf.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pNom.h">
+      <Filter>Engine\Math\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pTerm.h">
+      <Filter>Engine\Math\Polynomial</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ASCIIPath.h">
+      <Filter>Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Viewport.h">
+      <Filter>Engine\Graphics\Window\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowGen.h">
+      <Filter>Engine\Graphics\Window\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ViewportGLFW.h">
+      <Filter>Engine\Graphics\Window\Viewport\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowRen.h">
+      <Filter>Engine\Graphics\Window\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>Engine\Graphics\Window\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RendererGL4.h">
+      <Filter>Engine\Graphics\Window\Renderer\OpenGL4</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>Engine\Graphics\Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Blinn.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lambert.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Material.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Phong.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GuiAttr.h">
+      <Filter>Content</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Framebuffer.h">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gbuffer.h">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>Engine\Graphics\Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Capture.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cubemap.h">
+      <Filter>Engine\Graphics\Asset\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderAttr.h">
+      <Filter>Engine\Graphics\Asset\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderFile.h">
+      <Filter>Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skybox.h">
+      <Filter>Engine\Graphics\Asset\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\File.h">
+      <Filter>Engine\File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\stb_image.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imgui.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imconfig.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imgui_internal.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imstb_rectpack.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imstb_textedit.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\imstb_truetype.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\backends\imgui_impl_glfw.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Packages\include\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>Engine\External</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input.h">
+      <Filter>Engine\Graphics\Window\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputGLFW.h">
+      <Filter>Engine\Graphics\Window\Input\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>Engine\Graphics\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v6f.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AABB.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ray.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BSphere.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v3u.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plane.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Triangle.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vSpace.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stats.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\v2u.h">
+      <Filter>Engine\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OBB.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mNMf.h">
+      <Filter>Engine\Math\Matrix</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

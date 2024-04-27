@@ -1,0 +1,11 @@
+all pertinent files in ./src except main.cpp, several headers spanning other classes concerns aren't centrally relevant
+most class materials using custom math libraries of v2f, v3f, v4f & v6f for vectors, m2f, m3f, m4f for matrices
+other math headers for combinatorics & polynomials from other class materials can be ignored
+
+utility functions used throughout found largely in headers TypeErrata, Stats, Value, & ASCIIValue for simple primitive value adulteration
+
+rendering has not been the focus insofar and will have to be addressed later: the partial / incomplete setup of gBuffer output from the end of CS 300 is now hindering debug draw as I lost the capacity to succinctly switch in wireframe or point drawing via resampled tutorial code, and GUI setup is accordingly not terribly functional as that refactor would come first & take more time than I have presently.  The core assignments of using GJK, simplex intersection, building BSP / Octree really unfortunately not fully attended to as much as I'd hoped, but submitting what I have for the sake of completeness.   
+
+the core functionality for class materials are in the headers v3f (3D points), Ray, Plane, BSphere (bounding sphere), AABB, OBB, and Triangle intersection of any of the 2 are in overloaded methods IsIn(...) for the relevant type intersections, some with pass through optional args for using interim values generated, & all returning bool.
+
+honestly visualizations have to be rectified to meaningfully visualize most of the assignment criteria insofar as actual bounding hierarchies, let alone space partitioners. The functionality, mathematical sanity checks, and basic visualizations are tested to be working, & through fairly thorough expository commenting throughout may be more accessible (at least in MSVC, with all the headers' filters properly in place, probably should re-organize the src to use subfolders so the dependency isn't requisite for context).  Some basic UI is began, but much can't be meaningfully added as it should be without rendering fixes to support more modes.

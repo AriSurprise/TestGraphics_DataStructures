@@ -1,0 +1,63 @@
+#version 430 core
+
+layout (location = 0) in vec3 texLoc;
+layout (location = 1) in vec3 coords;
+layout (location = 2) in vec3 vColor;
+layout (location = 3) in vec3 normal;
+
+uniform int wireframe  = 0;
+
+uniform int centerUVs = 1;
+
+uniform int scaleUVs = 1;
+
+uniform vec3 mCenter = { 0.0f, 0.0f, 0.0f};
+
+uniform vec3 mNDCScale = { 0.50f, 0.50f, 0.50f};
+
+uniform vec3 wireColor = { 0.1f, 0.1f, 0.1f };
+
+uniform mat4 wFm = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+uniform mat4 wFn = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+uniform mat4 vFw = {{1.0f, 0.0f,-0.0f, 0.0f},
+                    {0.0f, 0.866f,-0.5f, 0.0f},
+                    {0.0f, 0.5f, 0.866f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+uniform mat4 pFv = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+uniform mat4 dFp = {{1.0f, 0.0f, 0.0f, 0.0f},
+                    {0.0f, 1.0f, 0.0f, 0.0f},
+                    {0.0f, 0.0f, 1.0f, 0.0f},
+                    {0.0f, 0.0f, 0.0f, 1.0f}};
+
+out vec4 vP;
+out vec4 vN;
+out vec3 vC;
+out vec3 vT0;
+out vec3 vMP;
+
+void main()
+{
+  vT0 = texLoc;
+  vMP = coords;
+  if (centerUVs != 0) { vMP -= mCenter; }
+  if (scaleUVs != 0) { vMP *= mNDCScale * 1.03125f; }
+  vec4 pos = vec4(coords.x, coords.y, coords.z, 1.0);
+  if (wireframe != 0) { vC = wireColor; }
+  else { vC = vColor; }
+  vP = wFm * pos;
+  vN = wFn * vec4(normal, 0);
+  gl_Position = dFp * pFv * vFw * vP;
+}
